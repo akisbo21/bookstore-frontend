@@ -1,0 +1,13 @@
+services:
+  frontend:
+    image: oven/bun
+    working_dir: /srv
+    volumes:
+      - ./src:/srv
+    command: bash -c "bun i && bun dev"
+    ports:
+      - 3000:3000
+      - 24678:24678
+
+volumes:
+  mysql-dir: {}
