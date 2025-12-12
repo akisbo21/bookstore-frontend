@@ -66,6 +66,7 @@ export default {
         { title: 'Category', align: 'start', value: 'category.name', sortable: true },
         { title: 'Release Date', align: 'start', value: 'release_date', sortable: true },
         { title: 'Price (HUF)', align: 'start', value: 'price_huf', sortable: true },
+        { title: 'Price (EUR)', align: 'start', value: 'price_eur', sortable: true },
         { title: 'Actions', align: 'center', value: 'actions' },
       ],
       books: [],
