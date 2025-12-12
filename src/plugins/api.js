@@ -46,13 +46,19 @@ const Api = function (nuxt, host) {
     return resp;
   };
 
-  self.get = async (url) => {
-    return await fetch(`${self.host}${url}`, {})
-      .then((response) => {
-        return response.json();
-      })
-      .catch(self.handleCatch);
-  };
+  self.get = async (url, options = {}) => {
+    const qs = options.params ? `?${new URLSearchParams(options.params).toString()}` : ''
+    return await fetch(`${self.host}${url}${qs}`, { signal: options.signal })
+        .then((response) => {
+          return response.json()
+        })
+        .catch((e) => {
+          if (e && e.name === 'AbortError') {
+            return null
+          }
+          return self.handleCatch(e)
+        })
+  }
 
   self.delete = async (url) => {
     const resp = await fetch(`${self.host}${url}`, {

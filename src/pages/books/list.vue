@@ -50,8 +50,8 @@ export default {
       headers: [
         { title: 'ID', align: 'start', value: 'id', sortable: true },
         { title: 'Title', align: 'start', value: 'title', sortable: true },
-        { title: 'Author', align: 'start', value: 'author_id', sortable: true },
-        { title: 'Category', align: 'start', value: 'category_id', sortable: true },
+        { title: 'Author', align: 'start', value: 'author.name', sortable: true },
+        { title: 'Category', align: 'start', value: 'category.name', sortable: true },
         { title: 'Release Date', align: 'start', value: 'release_date', sortable: true },
         { title: 'Price (HUF)', align: 'start', value: 'price_huf', sortable: true },
         { title: 'Actions', align: 'center', value: 'actions' },
