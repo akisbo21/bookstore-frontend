@@ -11,8 +11,13 @@
             </v-btn>
           </NuxtLink>
           <NuxtLink to="/books/create">
-            <v-btn color="secondary" large>
+            <v-btn color="secondary" class="mr-4" large>
               Create Book
+            </v-btn>
+          </NuxtLink>
+          <NuxtLink to="/statistics">
+            <v-btn color="info" large>
+              Statistics
             </v-btn>
           </NuxtLink>
         </div>
