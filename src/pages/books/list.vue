@@ -1,5 +1,17 @@
 <template>
   <v-container>
+    <v-text-field
+        v-model="search"
+        label="Search books"
+        prepend-inner-icon="mdi-magnify"
+        variant="outlined"
+        density="compact"
+        clearable
+        hide-details
+        class="ml-0 mb-4"
+        style="max-width: 320px;"
+    />
+
     <v-data-table
         :headers="headers"
         :items="books"
@@ -60,8 +72,22 @@ export default {
       isDeleteDialogOpen: false,
       bookToDeleteId: null,
       deleteMessage: '',
+      search: '',
+      searchTimer: null,
+      searchController: null,
     }
   },
+
+  watch: {
+    search(val) {
+      clearTimeout(this.searchTimer)
+
+      this.searchTimer = setTimeout(() => {
+        this.fetchBooks(val || '')
+      }, 600)
+    },
+  },
+
 
   methods: {
     confirmDelete(id) {
@@ -87,11 +113,31 @@ export default {
       this.isDeleteDialogOpen = false
       this.bookToDeleteId = null
     },
+
+    async fetchBooks(q) {
+      if (this.searchController) {
+        this.searchController.abort()
+      }
+
+      this.searchController = new AbortController()
+
+      const data = await this.$api.get('/api/books/search', {
+        params: { query: q },
+        signal: this.searchController.signal,
+      })
+
+      if (!data) {
+        return
+      }
+
+      this.books = Array.isArray(data) ? data : []
+    },
+
   },
 
   async mounted() {
     try {
-      this.books = await this.$api.get('/api/books/search?query=')
+      await this.fetchBooks('')
     } catch (error) {
       console.error('Error fetching books:', error)
     }

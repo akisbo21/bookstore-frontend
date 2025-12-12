@@ -71,14 +71,14 @@ export default {
 
       this.authorTimer = setTimeout(() => {
         this.fetchAuthors(val)
-      }, 1000)
+      }, 600)
     },
     categorySearch(val) {
       clearTimeout(this.categoryTimer)
 
       this.categoryTimer = setTimeout(() => {
         this.fetchCategories(val)
-      }, 1000)
+      }, 600)
     },
   },
   methods: {
